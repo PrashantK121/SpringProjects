@@ -1,0 +1,11 @@
+net\javaguides\springbootsecurity\entities\Role.class
+net\javaguides\springbootsecurity\entities\User.class
+net\javaguides\springbootsecurity\config\WebSecurityConfig.class
+net\javaguides\springbootsecurity\security\CustomUserDetailsService.class
+net\javaguides\springbootsecurity\security\AuthenticatedUser.class
+net\javaguides\springbootsecurity\repositories\MessageRepository.class
+net\javaguides\springbootsecurity\repositories\UserRepository.class
+net\javaguides\springbootsecurity\web\HomeController.class
+net\javaguides\springbootsecurity\entities\Message.class
+net\javaguides\springbootsecurity\SpringbootThymeleafSecurityDemoApplication.class
+net\javaguides\springbootsecurity\config\WebConfig.class
