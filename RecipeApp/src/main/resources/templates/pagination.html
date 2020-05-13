@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipe Home</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}">
+
+</head>
+<body>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">My Recipes!</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>View</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tr th:each="recipe : ${recipes.content}">
+                                <td th:text="${recipe.id}">334</td>
+                                <td th:text="${recipe.respDscrptn}">Tasty Goodnees 3</td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
+                            </tr>
+                        </table>
+                        </hr>
+                        </hr>
+             
+                        </br></br>
+                        
+        <div>
+        <ul class="pagination justify-content-center font-weight-medium">
+            <li class="page-item previous"
+                th:classappend="${!recipes.isFirst()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${!recipes.isFirst()}" th:href="@{${mapping}(page=${0})}">&#060;&#060;</a>
+                <a class="page-link" rel="tooltip" th:if="${recipes.isFirst()}">&#060;&#060;</a>
+            </li>
+
+            <li class="page-item previous"
+                th:classappend="${recipes.hasPrevious()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${recipes.hasPrevious()}" th:href="@{${mapping}(page=${recipes.getNumber()-1})}">&#060;</a>
+                <a class="page-link" rel="tooltip" th:if="${!recipes.hasPrevious()}">&#060;</a>
+            </li>
+
+            <li class="page-item"
+                th:each="pageNumber : ${#numbers.sequence(recipes.getNumber() - (currentPage), recipes.getNumber() + (currentPage))}"
+				th:if="${pageNumber > -1 && pageNumber < recipes.getTotalPages()}"
+                th:classappend="${pageNumber == recipes.getNumber()} ? 'active' : ''">
+                <a class="page-link"  rel="tooltip" th:href="@{${mapping}(page=${pageNumber})}">[[${pageNumber}+1]]</a>
+            </li>
+
+            <li class="page-item next"
+                th:classappend="${recipes.hasNext()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${recipes.hasNext()}" th:href="@{${mapping}(page=${recipes.getNumber()+1})}">&#062;</a>
+                <a class="page-link" rel="tooltip" th:if="${!recipes.hasNext()}">&#062;</a>
+            </li>
+            <li class="page-item next"
+                th:classappend="${!recipes.isLast()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${!recipes.isLast()}" th:href="@{${mapping}(page=${recipes.getTotalPages()-1})}">&#062;&#062;</a>
+                <a class="page-link" rel="tooltip" th:if="${recipes.isLast()}">&#062;&#062;</a>
+            </li>
+
+        </ul>
+</div>
+                        
+
+
+
+<div>
+        <ul class="pagination justify-content-center font-weight-medium">
+            &nbsp;&nbsp;
+			<li>
+			<p th:text="${(currentPage+1) + ' of ' + recipes.getTotalPages()}">Static content</p> 
+			</li>
+            &nbsp;&nbsp;
+            <li class="page-item previous"
+                th:classappend="${!recipes.isFirst()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${!recipes.isFirst()}" th:href="@{${mapping}(page=${0})}">&#060;&#060;</a>
+                <a class="page-link" rel="tooltip" th:if="${recipes.isFirst()}">&#060;&#060;</a>
+            </li>
+
+            <li class="page-item previous"
+                th:classappend="${recipes.hasPrevious()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${recipes.hasPrevious()}" th:href="@{${mapping}(page=${recipes.getNumber()-1})}">&#060;</a>
+                <a class="page-link" rel="tooltip" th:if="${!recipes.hasPrevious()}">&#060;</a>
+            </li>
+			
+            <li class="page-item next"
+                th:classappend="${recipes.hasNext()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${recipes.hasNext()}" th:href="@{${mapping}(page=${recipes.getNumber()+1})}">&#062;</a>
+                <a class="page-link" rel="tooltip" th:if="${!recipes.hasNext()}">&#062;</a>
+            </li>
+            <li class="page-item next"
+                th:classappend="${!recipes.isLast()} ? '' : 'disabled'">
+                <a class="page-link" rel="tooltip" th:if="${!recipes.isLast()}" th:href="@{${mapping}(page=${recipes.getTotalPages()-1})}">&#062;&#062;</a>
+                <a class="page-link" rel="tooltip" th:if="${recipes.isLast()}">&#062;&#062;</a>
+            </li>
+
+        </ul>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+
+</div>
+</body>
+	<script th:src="@{/webjars/jquery/3.4.0/jquery.min.js}"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script th:src="@{/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{js/index.js}" src="js/index.js"></script>
+</html>

@@ -1,0 +1,2 @@
+ERROR | 2020-04-28 18:02:12 [http-nio-8087-exec-1]  c.e.s.c.ControllerExceptionHandler - Handling not found exception
+ERROR | 2020-04-28 18:02:12 [http-nio-8087-exec-1]  c.e.s.c.ControllerExceptionHandler - null

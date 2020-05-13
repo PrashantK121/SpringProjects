@@ -20,7 +20,7 @@ public class BookController {
 	public String getAuthors(Model model) {
 		List<Book> books = bookRepository.findAll();
 		//Optional<Book> book = bookRepository.findById(58L);
-		//model.addAttribute("books",book.get() );
+		////model.addAttribute("books",book.get() );
 		model.addAttribute("books",books );
 		return "Book" ;
 	}
