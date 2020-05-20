@@ -1,20 +1,17 @@
 	package com.example.springMVC.controller;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.springMVC.cmd.IngredientCMD;
 import com.example.springMVC.cmd.RecipeCMD;
 import com.example.springMVC.cmd.UnitOfMeasureCMD;
-import com.example.springMVC.exceptions.NotFoundException;
 import com.example.springMVC.services.IngredientService;
 import com.example.springMVC.services.RecipeService;
 import com.example.springMVC.services.UnitOfMeasureService;
@@ -74,8 +71,9 @@ public class IngredientController {
         return "recipe/ingredient/ingredientform";
     }
 
-    @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCMD command){
+    //@PostMapping("recipe/{recipeId}/ingredient")
+    @PostMapping(value="recipe/{recipeId}/ingredient", consumes=MediaType.APPLICATION_JSON_VALUE)
+    public String saveOrUpdate(@RequestBody IngredientCMD command){
         IngredientCMD savedCommand = ingredientService.saveIngredientCommand(command);
 
         log.debug("saved receipe id:" + savedCommand.getRecipeId());
@@ -84,7 +82,19 @@ public class IngredientController {
        // return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients";
     }
+    
+    /*
+    @PostMapping(value="recipe/{recipeId}/ingredient", consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String saveOrUpdate(@RequestBody IngredientCMD command){
+        IngredientCMD savedCommand = ingredientService.saveIngredientCommand(command);
 
+        log.debug("saved receipe id:" + savedCommand.getRecipeId());
+        log.debug("saved ingredient id:" + savedCommand.getId());
+
+       // return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients";
+    }
+	*/
     @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
     public String deleteIngredient(@PathVariable String recipeId,
                                    @PathVariable String id){

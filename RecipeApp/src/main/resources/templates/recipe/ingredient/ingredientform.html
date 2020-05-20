@@ -5,19 +5,15 @@
     <title>Edit Ingredient</title>
 <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}">
-
-    <script th:src="@{/webjars/jquery/3.4.0/jquery.min.js}"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script th:src="@{/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'} " method="post">
-                <input type="hidden" th:field="*{id}"/>
+            <!--form  th:object="${ingredient}" action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient'}" method="post" id="ingredientSubmit"-->
+            <form  th:object="${ingredient}" id="ingredientSubmit">
+                <input type="hidden" th:field="*{recipeId}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -55,5 +51,14 @@
         </div>
     </div>
 </div>
+<div>
+
+</div>
 </body>
+	<script th:src="@{/webjars/jquery/3.4.0/jquery.min.js}"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script th:src="@{/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{../../../js/ingredientform.js}" ></script>
+		
+
 </html>

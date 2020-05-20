@@ -35,10 +35,7 @@ import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingRespectLayoutTitleS
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "com.baeldung.thymeleaf" })
-/**
- * Java configuration file that is used for Spring MVC and Thymeleaf
- * configurations
- */
+
 public class WebMVCConfig implements WebMvcConfigurer,  ApplicationContextAware {
 
     private ApplicationContext applicationContext;

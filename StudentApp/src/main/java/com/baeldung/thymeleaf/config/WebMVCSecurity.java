@@ -15,7 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebMVCSecurity extends WebSecurityConfigurerAdapter {
 
-    @Bean
+    
+    @Bean("authenticationManager")
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -27,7 +28,8 @@ public class WebMVCSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user1").password("{noop}user1Pass").authorities("ROLE_USER");
+       // auth.inMemoryAuthentication().withUser("user1").password("user1Pass").authorities("ROLE_USER");
+    	auth.inMemoryAuthentication().withUser("user1").password("user1Pass").authorities("ROLE_USER").and().withUser("admin").password("admin").authorities("ROLE_ADMIN");
     }
 
     @Override
@@ -37,7 +39,17 @@ public class WebMVCSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
+        // @formatter:off
+        http
+        .authorizeRequests()
+        .antMatchers("/auth/admin/*").hasAnyRole("ROLE_ADMIN")
+        .anyRequest().authenticated()
+        .and()
+        .httpBasic()
+        .and()
+        .headers().cacheControl().disable()
+        ;
+        // @formatter:on
     }
 
 }

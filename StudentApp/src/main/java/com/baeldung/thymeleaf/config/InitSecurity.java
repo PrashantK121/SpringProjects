@@ -1,3 +1,4 @@
+
 package com.baeldung.thymeleaf.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;

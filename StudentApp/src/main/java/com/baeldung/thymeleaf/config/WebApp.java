@@ -4,9 +4,7 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * Java configuration file that is used for web application initialization
- */
+
 public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     public WebApp() {
